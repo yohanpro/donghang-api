@@ -12,7 +12,7 @@ const config: TypeOrmModuleOptions = {
   database: process.env.DB_DATABASE,
   entities: [],
   autoLoadEntities: true,
-  synchronize: false,
+  synchronize: true,
   logging: true,
   keepConnectionAlive: true,
 };

@@ -6,11 +6,13 @@ import { AppService } from './app.service';
 import * as ormconfig from '../ormconfig';
 import { LoggerMiddleware } from 'middleware/logger.middleware';
 import { NestModule } from '@nestjs/common';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(ormconfig),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
