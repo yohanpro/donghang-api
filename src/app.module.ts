@@ -7,12 +7,14 @@ import * as ormconfig from '../ormconfig';
 import { LoggerMiddleware } from 'middleware/logger.middleware';
 import { NestModule } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(ormconfig),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -20,5 +22,6 @@ import { UsersModule } from './users/users.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer.apply(LoggerMiddleware).forRoutes('*');
+    
   }
 }
