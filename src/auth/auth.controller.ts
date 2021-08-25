@@ -15,10 +15,4 @@ export class AuthController {
     const token = await this.authService.googleAuth(idToken);
     return token;
   }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('protected')
-  protected() {
-    return this.authService.myProtectedRouteTest();
-  }
 }

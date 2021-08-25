@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OAuth2Client } from 'google-auth-library';
+import { AUTH_PROVIDER } from 'src/consts';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
 
       const userInformation = {
         provider_uid: sub,
-        provider: 1,
+        provider: AUTH_PROVIDER.GOOGLE,
         locale,
         email,
         name,
@@ -40,9 +41,5 @@ export class AuthService {
     return {
       accessToken: this.jwtService.sign(payload),
     };
-  }
-
-  myProtectedRouteTest() {
-    return 'This is Protected';
   }
 }

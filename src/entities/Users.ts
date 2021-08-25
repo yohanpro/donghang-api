@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -24,9 +24,18 @@ export class Users {
   @Column('varchar', { name: 'nickname', length: 30 })
   nickname: string;
 
-  @IsString()
-  @Column('varchar', { name: 'password', length: 100 })
-  password: string;
+  @IsPhoneNumber('KR')
+  @Column('smallint', { name: 'active status' })
+  phone: string;
+
+  @Column('smallint', { name: 'active status' })
+  activeStatus: number;
+
+  @Column('boolean', { name: 'verified user' })
+  verifiedUser: boolean;
+
+  @Column('varchar', { name: 'profile picture' })
+  userPicture: string;
 
   @CreateDateColumn()
   createdAt: Date;
