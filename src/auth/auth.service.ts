@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OAuth2Client } from 'google-auth-library';
 import { AUTH_PROVIDER } from 'src/consts';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userService: UsersService,
+  ) {}
   async googleAuth({ token }) {
     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -33,13 +37,25 @@ export class AuthService {
     return this.generateJWTToken(userInformation);
   }
 
-  generateJWTToken(userInformation) {
+  async generateJWTToken(userInformation) {
     const payload = {
       ...userInformation,
     };
 
+    const { email } = userInformation;
+    const user = await this.userService.findUserByEmail(email);
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    const { id, activeStatus } = user;
+
     return {
-      accessToken: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
+      id,
+      email,
+      activeStatus,
     };
   }
 }

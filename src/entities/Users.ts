@@ -25,7 +25,7 @@ export class Users {
   nickname: string;
 
   @IsPhoneNumber('KR')
-  @Column('smallint', { name: 'active status' })
+  @Column('varchar', { name: 'phone number' })
   phone: string;
 
   @Column('smallint', { name: 'active status' })

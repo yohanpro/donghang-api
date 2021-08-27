@@ -8,6 +8,12 @@ export class UsersService {
   constructor(
     @InjectRepository(Users) private usersRepository: Repository<Users>,
   ) {}
+
+  async findUserByEmail(email) {
+    const user = await this.usersRepository.findOne({ email });
+
+    return user;
+  }
   async allUsers() {
     const allUsers = await this.usersRepository.find();
     return allUsers;

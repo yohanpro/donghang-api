@@ -11,10 +11,11 @@ export default class CreateUsers implements Seeder {
       .values([
         {
           id: 1,
-          email: 'yohan@yohanpro.com',
+          email: 'yohanneem@gmail.com',
           nickname: 'John',
           activeStatus: 1,
           phone: '01012345678',
+          verifiedUser: true,
           userPicture:
             'https://c8.alamy.com/comp/P9MYWR/man-avatar-profile-P9MYWR.jpg',
         },
@@ -24,6 +25,7 @@ export default class CreateUsers implements Seeder {
           nickname: 'Solid',
           activeStatus: 2,
           phone: '01012345678',
+          verifiedUser: false,
           userPicture:
             'https://images.unsplash.com/photo-1614283233556-f35b0c801ef1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2lkZSUyMHByb2ZpbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
         },
