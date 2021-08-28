@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OAuth2Client } from 'google-auth-library';
-import { AUTH_PROVIDER } from 'src/consts';
+import { AUTH_PROVIDER, ACCOUNT_ACTIVE_STATUS } from 'src/consts';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -34,27 +34,30 @@ export class AuthService {
     };
 
     const userInformation = await verify();
-    return this.generateJWTToken(userInformation);
+    return this.processUserVerify(userInformation);
   }
 
-  async generateJWTToken(userInformation) {
-    const payload = {
-      ...userInformation,
-    };
-
+  async processUserVerify(userInformation) {
     const { email } = userInformation;
     const user = await this.userService.findUserByEmail(email);
 
     if (!user) {
-      throw new NotFoundException();
+      return {
+        email,
+        activeStatus: ACCOUNT_ACTIVE_STATUS.PRE_ACTIVE,
+      };
     }
+    const payload = { ...user, ...userInformation };
+    const userData = await this.makeUserData(payload);
 
-    const { id, activeStatus } = user;
+    return userData;
+  }
+  makeUserData(payload) {
+    const { id, activeStatus, email, nickname } = payload;
 
     return {
-      token: this.jwtService.sign(payload),
+      token: this.jwtService.sign({ email, nickname }),
       id,
-      email,
       activeStatus,
     };
   }
