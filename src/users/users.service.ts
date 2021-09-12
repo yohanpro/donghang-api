@@ -11,6 +11,14 @@ export class UsersService {
 
   async findUserByEmail(email) {
     const user = await this.usersRepository.findOne({ email });
+    return user;
+  }
+
+  async getUserProfile(id: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+      select: ['id', 'email', 'nickname', 'verifiedUser', 'userPicture'],
+    });
 
     return user;
   }

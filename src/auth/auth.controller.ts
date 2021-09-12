@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
@@ -13,6 +13,11 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: '성공시 API 리턴',
+  })
+  @ApiParam({
+    name: 'idToken',
+    type: String,
+    example: 'dkjfakfj',
   })
   @Post('google')
   async googleOAuth(@Body() idToken) {
