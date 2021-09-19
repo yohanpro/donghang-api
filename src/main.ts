@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './filters/httpException.filter';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 const port = process.env.PORT || 8080;
 declare const module: any;
@@ -14,6 +16,18 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
+  app.use(cookieParser());
+  app.use(
+    session({
+      resave: false,
+      secure: false,
+      secret: 'abc',
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+      },
+    }),
+  );
   app.useGlobalFilters(new HttpExceptionFilter());
   const config = new DocumentBuilder()
     .setTitle('동행 API 문서')

@@ -6,7 +6,12 @@ import {
 } from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common';
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthUser } from './decorator/user.decorator';
 import { UsersService } from './users.service';
@@ -17,6 +22,10 @@ export class UsersController {
 
   @ApiTags('유저 프로필 조회하기')
   @ApiOperation({ summary: '유저 프로필 조회' })
+  @ApiQuery({
+    name: 'query id',
+  })
+  @ApiBearerAuth()
   @UseGuards(new JwtAuthGuard())
   @Get()
   async getUserProfile(@Query('id') queryId, @AuthUser() requestUser: any) {
