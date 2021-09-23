@@ -28,7 +28,8 @@
     "db:migrate": "npm run typeorm migration:run",
     "db:migrate:revert": "npm run typeorm migration:revert",
     "db:create-migration": "npm run typeorm migration:create -- -n",
-    "db:generate-migration": "npm run typeorm migration:generate -- -n"
+    "db:generate-migration": "npm run typeorm migration:generate -- -n",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -74,6 +75,7 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.0",
     "jest": "27.0.6",
     "prettier": "^2.3.2",
     "run-script-webpack-plugin": "^0.0.11",

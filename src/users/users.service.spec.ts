@@ -15,6 +15,4 @@ describe('UsersService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  it('안녕하세요? 테스트입니다', () => {});
 });
