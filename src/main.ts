@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 // const port = process.env.PORT || 8080;
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 declare const module: any;
 
 async function bootstrap() {
