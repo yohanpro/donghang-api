@@ -13,7 +13,7 @@
     "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start:dev && withFront": "concurrently \"nest build --webpack --webpackPath webpack-hmr.config.js --watch\" \"cd ../Front && yarn dev \"",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
