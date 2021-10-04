@@ -6,10 +6,11 @@ import { HttpExceptionFilter } from './filters/httpException.filter';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
-// const port = process.env.PORT || 8080;
-const port = process.env.PORT || 8080;
 declare const module: any;
 
+const port = process.env.PORT || 8080;
+
+console.log('!@!@Port: ', port);
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
@@ -46,6 +47,7 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+  console.log('app.listen: ', port);
   await app.listen(port);
 }
 bootstrap();
