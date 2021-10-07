@@ -8,6 +8,7 @@ import { LoggerMiddleware } from 'middleware/logger.middleware';
 import { NestModule } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { DonghangModule } from './donghang/donghang.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRoot(ormconfig),
     UsersModule,
     AuthModule,
+    DonghangModule,
   ],
   controllers: [AppController],
   providers: [AppService],

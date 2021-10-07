@@ -37,7 +37,6 @@ export class UsersController {
 
   @Post()
   createUser(@Body() body) {
-    console.log('body', body);
     const { email } = body;
 
     if (!email) {
