@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { DonghangArticle } from './Donghang/main';
+import { DonghangArticle } from './DonghangArticle';
 
 @Index('email', ['email'], { unique: true })
 @Entity({ name: 'Users' })

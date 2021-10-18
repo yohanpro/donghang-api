@@ -11,3 +11,11 @@ export const ACCOUNT_ACTIVE_STATUS = {
   LOCKED: 3,
   DELETED: 4,
 };
+
+export const DONGHANG_PARTICIPATE_STATUS = {
+  DRAFT: 0,
+  OPEN: 1,
+  CLOSED: 2,
+  FULL: 3,
+  DELETED: 4,
+};

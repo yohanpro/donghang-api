@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import dotenv from 'dotenv';
 import { Users } from './src/entities/Users';
-import { DonghangArticle } from './src/entities/Donghang/main';
+import { DonghangArticle } from './src/entities/DonghangArticle';
 
 dotenv.config();
 
