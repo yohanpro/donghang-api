@@ -5,20 +5,23 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { DonghangComments } from './DonghangComments';
 import { Users } from './Users';
 
 @Entity({ name: 'DonghangArticle' })
 export class DonghangArticle {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-  id: number;
+  @PrimaryGeneratedColumn({ type: 'int', name: 'article_id' })
+  @OneToMany(() => DonghangComments, (comments) => comments.Article)
+  article_id: number;
   @ManyToOne(() => Users, (users) => users.id, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn([{ name: 'WriterId', referencedColumnName: 'id' }])
+  @JoinColumn([{ name: 'writer_id', referencedColumnName: 'id' }])
   User: Users;
 
   @Column('varchar', { length: 100 })

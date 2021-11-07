@@ -10,12 +10,17 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { DonghangArticle } from './DonghangArticle';
+import { DonghangComments } from './DonghangComments';
 
 @Index('email', ['email'], { unique: true })
 @Entity({ name: 'Users' })
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   @OneToMany(() => DonghangArticle, (donghangArticle) => donghangArticle.User)
+  @OneToMany(
+    () => DonghangComments,
+    (donghangComments) => donghangComments.CommentUser,
+  )
   id: number;
 
   @IsEmail()
