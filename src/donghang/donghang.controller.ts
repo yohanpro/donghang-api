@@ -1,8 +1,9 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -17,7 +18,21 @@ export class DonghangController {
   @ApiOperation({ summary: '나라별 동행 전체 글' })
   @ApiBearerAuth()
   @Get(':countryId')
-  getDonghangArticleByCountry(@Param('countryId') countryId: number) {
-    return `donghang article,`;
+  @ApiQuery({ name: 'page', description: '페이지', required: false })
+  @ApiQuery({
+    name: 'size',
+    description: '페이지당 보여질 콘텐츠 개수',
+    required: false,
+  })
+  getDonghangArticle(
+    @Param('countryId') countryId: number,
+    @Query('page') page: number,
+    @Query('size') size: number,
+  ) {
+    return this.donghangService.getCountryDongHangArticle({
+      countryId,
+      page,
+      size,
+    });
   }
 }
