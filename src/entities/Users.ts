@@ -21,7 +21,7 @@ export class Users {
     () => DonghangComments,
     (donghangComments) => donghangComments.CommentUser,
   )
-  id: number;
+  id?: number;
 
   @IsEmail()
   @IsNotEmpty()
