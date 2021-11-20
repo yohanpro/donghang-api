@@ -21,8 +21,8 @@ export class DonghangArticle {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn([{ name: 'writer_id', referencedColumnName: 'id' }])
-  User: Users;
+  @JoinColumn({ name: 'writer_id', referencedColumnName: 'id' })
+  user: Users;
 
   @Column('varchar', { length: 100 })
   title: string;

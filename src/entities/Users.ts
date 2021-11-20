@@ -6,6 +6,7 @@ import {
   Entity,
   Index,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,13 +16,13 @@ import { DonghangComments } from './DonghangComments';
 @Index('email', ['email'], { unique: true })
 @Entity({ name: 'Users' })
 export class Users {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-  @OneToMany(() => DonghangArticle, (donghangArticle) => donghangArticle.User)
+  @PrimaryGeneratedColumn()
+  @OneToMany(() => DonghangArticle, (donghangArticle) => donghangArticle.user)
   @OneToMany(
     () => DonghangComments,
     (donghangComments) => donghangComments.CommentUser,
   )
-  id?: number;
+  id: string;
 
   @IsEmail()
   @IsNotEmpty()
